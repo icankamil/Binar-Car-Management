@@ -1,0 +1,58 @@
+    <%- include("./partials/header") %>
+    <div id="main-content" class="container rel--margin">
+      <div class="alert alert-dark d-none" id="alert" role="alert">
+      </div>
+      <% if(message != null) { %>
+      <div class="alert alert-success" id="alert-success" role="alert">
+        <%= message %>
+      </div>
+      <% } %>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mt-3">
+          <li class="breadcrumb-item"><a href="#">Cars</a></li>
+          <li class="breadcrumb-item">List Car</li>
+        </ol>
+      </nav>
+      <h1 class="d-inline">List Car</h1>
+      <a class="btn btn-primary float-end" id="addNewCar" href="/addnewcar"><i class="bi bi-plus"></i> Add New Car</a>
+      <div class="row row-cols-1 row-cols-md-3" id="section-content">
+        <% if (mobil.length>=1) {%>
+        <% mobil.forEach((el,index)=>{ %>
+        <div class="col my-2" id=<%= mobil[index].id %>>
+          <div class="card h-100">
+            <img src=<%= mobil[index].photo_mobil %> class="card-img-top" alt=<%= mobil[index].name_mobil %>>
+            <div class="card-body">
+              <p class="card-title"><%= mobil[index].name_mobil %></p>
+              <h5 class="card-text"><%= new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR"}).format(mobil[index].rent_mobil) %> / hari</h5>
+              <p class="card-text"><small class="text-muted"><i class="bi bi-clock"></i> Updated at <%= new Date(mobil[index].updatedAt).toDateString() %></small></p>
+              <div class="hstack gap-2">
+              <button type="button" class="btn btn-outline-danger w-50 delete" id=<%= mobil[index].id %> data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="bi bi-trash"></i> Delete</button>
+              <a href="/Car/<%= mobil[index].id %>"class="btn btn-success w-50"><i class="bi bi-pencil-square"></i> Edit</a>
+            </div>
+            </div>
+          </div>
+        </div>
+        <% }) } else { %>
+          <div class="col w-100">
+            <div class="card h-100"><h3 class="text-center">Data Mobil Kosong</h3>
+            </div>
+            </div>
+          <% } %>
+      </div>
+    </div>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content py-3 px-3">
+          <div class="modal-body">
+<img src="/img/mobils-02.png" class="w-50 d-block mx-auto" alt="Gambar Hapus Data Mobil">
+<p class="text-center"><strong>Menghapus data mobil</strong></p>
+<p class="text-center">Setelah dihapus, data mobil tidak dapat dikembalikan. Yakin ingin menghapus?</p>
+<div class="hstack gap-2 justify-content-center">
+            <button type="button" class="btn btn-primary w-25 ya">Ya</button>
+            <button type="button" class="btn btn-outline-primary w-25" data-bs-dismiss="modal">Tidak</button>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <%- include("./partials/footer") %>

@@ -9,3 +9,8 @@ component.deleteCar()
 component.updateCar()
 component.alertify()
 component.loadContent()
+
+let search = document.getElementById("btnCari")
+search.addEventListener("click",function () {
+    component.searchContent();
+})

@@ -41,6 +41,12 @@ app.get('/', async (req, res) => {
 }
 })
 
+app.get('/Car/', async (req, res) => {
+  console.log(req.query.search)
+  let mobil = await db.getAllSearched(req.query.search)
+  res.status(200).json(mobil)
+})
+
 app.get('/Car/:id', async (req, res) => {
   const mobil = await db.getOne(req.params.id)
   if(req.get('insomnia')){

@@ -207,4 +207,53 @@ class Component {
     });
   }
   }
+
+  searchContent(){
+    //set html variable to card container
+    document.getElementById("section-content").innerHTML = ` <div class="col my-2">
+    <div class="card h-100">
+      <img class="skeleton h-100 card-img-top">
+      <div class="card-body">
+        <p class="skeleton card-title"></p>
+        <h5 class="skeleton card-text"></h5>
+        <p class="skeleton card-text"><small class="skeleton-text text-muted"><i class="bi bi-clock"></i> </small></p>
+        <div class="skeleton hstack gap-2">
+        <button type="button" class="skeleton" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="bi bi-trash"></i></button>
+        <a class="skeleton"><i class="bi bi-pencil-square"></i> </a>
+      </div>
+      </div>
+    </div>
+  </div>`;
+    let html = ""
+    fetch(`${window.location.protocol}//${window.location.host}/Car/?search=${document.getElementById('cari').value}`)
+    .then(response => response.json())
+    .then((data) =>{
+      if(data>0){
+        data.forEach((item) =>{
+          html+=`
+          <div class="col my-2 " id=${item.id}>
+          <div class="card h-100">
+            <img src=${item.photo_mobil} class="card-img-top" alt=${item.name_mobil}>
+            <div class="card-body">
+              <p class="card-title">${item.name_mobil}</p>
+              <h5 class="card-text">${ new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR"}).format(item.rent_mobil) } / hari</h5>
+              <p class="card-text"><small class="text-muted"><i class="bi bi-clock"></i> Updated at ${ new Date(item.updatedAt).toDateString() }</small></p>
+              <div class="hstack gap-2">
+              <button type="button" class="btn btn-outline-danger w-50 delete" id=${item.id} data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="bi bi-trash"></i> Delete</button>
+              <a href="/Car/${item.id}"class="btn btn-success w-50"><i class="bi bi-pencil-square"></i> Edit</a>
+            </div>
+            </div>
+          </div>
+          </div>
+          `;})
+      }else{
+        html = `<div class="card w-100 my-3">
+        <h1 class="d-block mx-auto py-5">Sorry, data yang kamu cari gak ada</h1>
+        </div>`
+      }      
+      //set html variable to card container
+document.getElementById("section-content").innerHTML = html;
+    })
+        
+    }
 }

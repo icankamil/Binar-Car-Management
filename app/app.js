@@ -1,5 +1,6 @@
 const { Mobil } = require("../models");
 const upload = require("../middleware/middleware");
+const {Op} = require('sequelize')
 
 class database {
   #id;
@@ -50,6 +51,22 @@ class database {
     await Mobil.findAll({order:[['name_mobil','ASC'],]}).then((mobil) => {
        let vessel=JSON.stringify(mobil)
        cars = JSON.parse(vessel)
+    }).catch(err => message);
+    if(cars != null){
+    return cars
+  }else{
+    return {message:message}
+  }
+  }
+
+  async getAllSearched(param) {
+    const message = "Tidak ada data mobil"
+    let cars=[]
+    await Mobil.findAll({where:{
+name_mobil : param}}).then((mobil) => {
+       let vessel=JSON.stringify(mobil)
+       cars = JSON.parse(vessel)
+       console.log(cars)
     }).catch(err => message);
     if(cars != null){
     return cars

@@ -18,16 +18,16 @@
       <div class="row row-cols-1 row-cols-md-3" id="section-content">
         <% if (mobil.length>=1) {%>
         <% mobil.forEach((el,index)=>{ %>
-        <div class="col my-2" id=<%= mobil[index].id %>>
+        <div class="col my-2">
           <div class="card h-100">
-            <img src=<%= mobil[index].photo_mobil %> class="card-img-top" alt=<%= mobil[index].name_mobil %>>
+            <img class="card-img-top">
             <div class="card-body">
-              <p class="card-title"><%= mobil[index].name_mobil %></p>
-              <h5 class="card-text"><%= new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR"}).format(mobil[index].rent_mobil) %> / hari</h5>
-              <p class="card-text"><small class="text-muted"><i class="bi bi-clock"></i> Updated at <%= new Date(mobil[index].updatedAt).toDateString() %></small></p>
-              <div class="hstack gap-2">
-              <button type="button" class="btn btn-outline-danger w-50 delete" id=<%= mobil[index].id %> data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="bi bi-trash"></i> Delete</button>
-              <a href="/Car/<%= mobil[index].id %>"class="btn btn-success w-50"><i class="bi bi-pencil-square"></i> Edit</a>
+              <p class="skeleton-text card-title"></p>
+              <h5 class="skeleton-text card-text"></h5>
+              <p class="skeleton-text card-text"><small class="skeleton-text text-muted"><i class="bi bi-clock"></i> </small></p>
+              <div class="skeleton-footer hstack gap-2">
+              <button type="button" class="btn btn-outline-danger w-50 delete" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="bi bi-trash"></i> Delete</button>
+              <a class="btn btn-success w-50"><i class="bi bi-pencil-square"></i> Edit</a>
             </div>
             </div>
           </div>

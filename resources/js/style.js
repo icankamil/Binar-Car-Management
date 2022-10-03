@@ -210,7 +210,7 @@ class Component {
 
   searchContent(){
     //set html variable to card container
-    document.getElementById("section-content").innerHTML = ` <div class="col my-2">
+    document.getElementById("isiData").innerHTML = ` <div class="col my-2">
     <div class="card h-100">
       <img class="skeleton h-100 card-img-top">
       <div class="card-body">
@@ -228,7 +228,8 @@ class Component {
     fetch(`${window.location.protocol}//${window.location.host}/Car/?search=${document.getElementById('cari').value}`)
     .then(response => response.json())
     .then((data) =>{
-      if(data>0){
+      if(data.length>0){
+        html+=`<div class="row row-cols-1 row-cols-md-3" id="section-content">`
         data.forEach((item) =>{
           html+=`
           <div class="col my-2 " id=${item.id}>
@@ -246,13 +247,14 @@ class Component {
           </div>
           </div>
           `;})
+          html+=`</div>`
       }else{
         html = `<div class="card w-100 my-3">
         <h1 class="d-block mx-auto py-5">Sorry, data yang kamu cari gak ada</h1>
         </div>`
       }      
       //set html variable to card container
-document.getElementById("section-content").innerHTML = html;
+document.getElementById("isiData").innerHTML = html;
     })
         
     }

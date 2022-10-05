@@ -13,7 +13,7 @@ ERD dari sistem ini bisa dilihat melalui tautan berikut : https://dbdiagram.io/d
 - Akses Halaman Edit Mobil = http://hostname/Car/:id
 
 ## API Endpoint
-
+- untuk akses API, set header key insomnia dengan value true
 - Create data mobil baru = POST `http://hostname/Car`
 - Get semua data mobil = GET `http://hostname/`
 - Get satu data mobil = GET `http://hostname/Car/:id`
